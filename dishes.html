@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://kit.fontawesome.com/4876bfe495.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div>
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img width="150" src="images/logo.png" alt="" />
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <div class="d-flex gap-2" role="search">
+              <button class="btn btn-primary">Register</button>
+              <a href="login.html"
+                ><button class="btn btn-outline-primary">Login</button></a
+              >
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div id="page-spinner" class="p-5 text-center">
+        <div class="spinner-border page-spinner" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+
+      <div style="display: none" id="main-content">
+        <div class="row px-2 py-4">
+          <div class="col">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <div class="mb-4">
+                      <img
+                        id="res-image"
+                        width="200"
+                        src="https://www.xbytesolutions.com/assets/img/food-delivery-app/hero-screen.png"
+                        alt=""
+                      />
+                    </div>
+                    <h5 class="card-title" id="res-name">Saylani Foods</h5>
+                    <p class="card-text" id="res-address"></p>
+                    <span class="badge rounded-pill text-bg-primary"
+                      >Biryani</span
+                    >
+                    <span class="badge rounded-pill text-bg-primary"
+                      >Biryani</span
+                    >
+                    <span class="badge rounded-pill text-bg-primary"
+                      >Biryani</span
+                    >
+                    <span class="badge rounded-pill text-bg-primary"
+                      >Biryani</span
+                    >
+                    <span class="badge rounded-pill text-bg-primary"
+                      >Biryani</span
+                    >
+                  </div>
+                  <div class="d-flex gap-4 socail-icons">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row px-2 py-4">
+          <div id="all-dishes" class="col-8"></div>
+          <div class="col-4">
+            <div class="card text-center">
+              <div class="card-header text-bold font-weight-bold">
+                <b>Cart</b>
+              </div>
+              <div id="cart" class="card-body"></div>
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                Checkout
+              </button>
+              <!-- Modal -->
+              <div
+                class="modal fade"
+                id="exampleModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Checkout
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body text-start">
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label"
+                          >Name</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="customerName"
+                          placeholder="Enter name"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label"
+                          >Contact number</label
+                        >
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="customerContact"
+                          placeholder="Enter contact number"
+                        />
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label"
+                          >Address</label
+                        >
+                        <textarea
+                          class="form-control"
+                          id="customerAddress"
+                          rows="3"
+                        ></textarea>
+                      </div>
+                      <div class="d-flex justify-content-between">
+                        <span>Delivery charges:</span>
+                        <span class="fw-bold">Rs 100 /-</span>
+                      </div>
+                      <div class="d-flex justify-content-between">
+                        <span>Total amount:</span>
+                        <span class="fw-bold" id="totalAmount">Rs 343</span>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        id="closeBtn"
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                      <button id="placeOrder" class="btn btn-primary">
+                        Place order
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="./js/dishes.js" type="module"></script>
+    <script src="./js/order.js" type="module"></script>
+  </body>
+</html>
