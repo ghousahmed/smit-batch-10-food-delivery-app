@@ -51,7 +51,7 @@ const getAllDishes = async () => {
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                     <img class="dish-image"
-                        src="https://www.cookwithnabeela.com/wp-content/uploads/2023/09/ChickenBiryani.webp" />
+                        src="${doc.data().image}" />
                     <div class="p-2">
                         <h5 class="card-title">${doc.data().name}</h5>
                         <h3 class="card-title">Rs: ${doc.data().price} /-</h3>
