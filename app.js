@@ -42,7 +42,7 @@ const getAllRestaurants = async () => {
   querySnapshot.forEach((doc) => {
     console.log(doc.id, " => ", doc.data());
     resList.innerHTML += `
-        <div class="col">
+        <div class="col mb-4">
         <div class="card" style="width: 18rem;">
             <img src="${doc.data().image}"
                 class="card-img-top" alt="..." loading="lazy">
@@ -55,9 +55,8 @@ const getAllRestaurants = async () => {
                     <span class="badge rounded-pill text-bg-primary">Karahi</span>
                     <span class="badge rounded-pill text-bg-primary">Drinks</span>
                 </p>
-                <a href="dishes.html?restaurant=${
-                  doc.id
-                }" class="btn btn-primary">View all dishes</a>
+                <a href="dishes.html?restaurant=${doc.id
+      }" class="btn btn-primary">View all dishes</a>
             </div>
         </div>
          </div>
