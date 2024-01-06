@@ -13,9 +13,10 @@ import {
   updateDoc,
 } from "./firebase.js";
 const placeOrder = document.getElementById("placeOrder");
+const addressRegex = /^[a-zA-Z0-9,]{10,}/;
+const phoneNumberRegex = /^(\+92|92|0)?[3-9]\d{9}$/;
 
-placeOrder &&
-  placeOrder.addEventListener("click", async () => {
+placeOrder && placeOrder.addEventListener("click", async () => {
     const cartDiv = document.getElementById("cart");
     const customerName = document.getElementById("customerName");
     const customerContact = document.getElementById("customerContact");
@@ -24,33 +25,83 @@ placeOrder &&
     const sum = cart.reduce((a, b) => a + Number(b.price) * b.qty, 0);
     const totalAmount = document.getElementById("totalAmount");
     const closeBtn = document.getElementById("closeBtn");
-
-    const orderDetails = {
-      customerName: customerName.value,
-      customerContact: customerContact.value,
-      customerAddress: customerAddress.value,
-      status: "pending",
-      cart,
-      timestamp: serverTimestamp(),
-      orderAmount: sum,
-      deliveryCharges: 100,
-      totalAmount: sum + 100,
-    };
-    await addDoc(collection(db, "orders"), orderDetails);
-    Swal.fire({
-      position: "center-center",
-      icon: "success",
-      title: "Your order has been placed",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    customerName.value = "";
-    customerContact.value = "";
-    customerAddress.value = "";
-    localStorage.removeItem("cart");
-    cartDiv.innerHTML = "";
-    totalAmount.innerHTML = "";
-    closeBtn.click();
+    if (!customerName.value.trim()) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: "Please enter your name",
+      });
+    }else if(!customerContact.value.match(phoneNumberRegex)){
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: "Please enter valid contact number .Number should not be greater than 11 numbers ",
+      });
+    } 
+    else if(!customerAddress.value.match(addressRegex)){
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: "Invalid address format. Please enter a valid address..",
+      });
+    } else {
+      const orderDetails = {
+        customerName: customerName.value,
+        customerContact: customerContact.value,
+        customerAddress: customerAddress.value,
+        status: "pending",
+        cart,
+        timestamp: serverTimestamp(),
+        orderAmount: sum,
+        deliveryCharges: 100,
+        totalAmount: sum + 100,
+      };
+      await addDoc(collection(db, "orders"), orderDetails);
+      Swal.fire({
+        position: "center-center",
+        icon: "success",
+        title: "Your order has been placed",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      customerName.value = "";
+      customerContact.value = "";
+      customerAddress.value = "";
+      localStorage.removeItem("cart");
+      cartDiv.innerHTML = "";
+      totalAmount.innerHTML = "";
+      closeBtn.click();
+    }
   });
 
 const getAllOrders = async () => {
