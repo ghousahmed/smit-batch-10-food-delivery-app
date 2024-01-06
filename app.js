@@ -7,12 +7,64 @@ import {
   onAuthStateChanged,
 } from "./js/firebase.js";
 
+let mailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+// let passFormat = /^[A-Za-z]\w{7,14}$/;  // for strong password
+let numPasswordFormat = /^\w{6,}$/
 const login = () => {
   const email = document.getElementById("email");
   const password = document.getElementById("password");
+  if (!email.value.match(mailFormat)) {
+        // console.log("Incorrect Email");
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          },
+        });
+        Toast.fire({
+          icon: "error",
+          title: "Enter correct Email Address",
+        });    
+    } else if (!password.value.match(numPasswordFormat)) {
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: "Password must be greater than 6 characters",
+      });
+    }else{
   signInWithEmailAndPassword(auth, email.value, password.value)
     .then((userCredential) => {
       const user = userCredential.user;
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "success",
+        title: "Logged in successfully",
+      });
       console.log(user);
       if (user.email === "admin@gmail.com") {
         location.href = "dashboard.html";
@@ -22,9 +74,26 @@ const login = () => {
     .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      const Toast = Swal.mixin({
+        toast: true,
+        position: "top-end",
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        },
+      });
+      Toast.fire({
+        icon: "error",
+        title: errorMessage,
+      });
       console.log("err->", errorMessage);
     });
+  }
 };
+
 
 const loginBtn = document.getElementById("loginBtn");
 
